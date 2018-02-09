@@ -141,4 +141,5 @@ var rowData = [["Jan 18 1AM",0,"No activity","null"],
 ["Jan 23 9PM",52,"52 tweets","null"],
 ["Jan 23 10PM",35,"35 tweets","null"],
 ["Jan 23 11PM",27,"27 tweets","null"],
+["Jan 25 12AM",27,"Fox News adopts the #ReleaseTheMemo hashtag from its official Twitter account","point { size: 4; fill-color: red; }"],
 ];
