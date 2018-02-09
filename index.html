@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>New Knowledge Demo</title>
+
+    <!-- Bootstrap core CSS -->
+    <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <!-- Custom styles for this template -->
+    <style>
+        body {
+          padding-top: 5rem;
+        }
+        .starter-template {
+          text-align: center;
+        }
+        .chart-block {
+          margin-top: 40px;
+          width: 100%;
+        }
+        .chart-block h2 {
+          position:relative;
+          z-index: 999;
+        }
+        .chart-container {
+          height: 600px;
+          margin-top: -80px;
+        }
+        .navbar {
+          background: white;
+        }
+        .navbar img {
+          width: 200px;
+        }
+        .container {
+          max-width: 2000px;
+        }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+    <script src="chart-data.js"></script>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages': ['corechart','annotatedtimeline']});
+      google.charts.setOnLoadCallback(initialize);
+
+      function initialize() {
+        // The URL of the spreadsheet to source data from.
+        /*
+        var query = new google.visualization.Query(
+            'https://docs.google.com/spreadsheets/d/1pJ-rWhEmr082ja2ZVjltLbzyPJovA2Mpn1jNGUSKxWo/edit?usp=sharing');
+        query.send(draw);
+        
+        var query2 = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1OoQG7wQaBYsTcv17DBBAZ_Ogxk62KDMApHEE3JqGdDA/edit?usp=sharing');
+        query2.send(draw2);
+        */
+        draw();
+      }
+
+      function draw(response) {
+
+        //var ticketsData = response.getDataTable();
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Date'); // Implicit domain label col.
+        data.addColumn('number', 'Tweet Count'); // Implicit series 1 data col.
+        data.addColumn({type: 'string', role: 'tooltip'});
+        data.addColumn({type: 'string', role: 'style'});
+        data.addRows(rowData);
+
+        var chart = new google.visualization.LineChart(
+            document.getElementById('chart_div2'));
+        chart.draw(data, 
+          {
+            'legend': 'none',
+            'vAxis': {'title': 'Tweet Count by Hour'},
+            'tooltip': {isHtml: true},
+            'pointSize': 1
+          }
+        );
+
+      }
+
+      function draw2(response) {
+        if (response.isError()) {
+          alert('Error in query');
+        }
+
+        var ticketsData = response.getDataTable();
+        var chart = new google.visualization.LineChart(
+            document.getElementById('chart_div2'));
+        chart.draw(ticketsData, {'legend': 'none',
+            'vAxis': {'title': 'Tweet Count by Date'}});
+
+      }
+    </script>
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#"><img src="nk-logo-black.png" /></a>
+    </nav>
+
+    <div class="container">
+
+      <div class="starter-template">
+        <div class="chart-block">
+          <h2>#ReleaseTheMemo Campaign Timeline</h2>
+          <div id="chart_div2" class="chart-container"></div>
+        </div>
+
+      </div>
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.8.8/jquery.csv.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+  </body>
+</html>
